@@ -40,6 +40,10 @@
             this.tbHueRangeRight = new System.Windows.Forms.TextBox();
             this.btnHueInRange = new System.Windows.Forms.Button();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -132,6 +136,7 @@
             this.tbHueRangeLeft.Name = "tbHueRangeLeft";
             this.tbHueRangeLeft.Size = new System.Drawing.Size(100, 22);
             this.tbHueRangeLeft.TabIndex = 9;
+            this.tbHueRangeLeft.Text = "0";
             // 
             // tbHueRangeRight
             // 
@@ -139,6 +144,7 @@
             this.tbHueRangeRight.Name = "tbHueRangeRight";
             this.tbHueRangeRight.Size = new System.Drawing.Size(100, 22);
             this.tbHueRangeRight.TabIndex = 10;
+            this.tbHueRangeRight.Text = "5";
             // 
             // btnHueInRange
             // 
@@ -159,6 +165,38 @@
             this.pictureBox6.TabIndex = 12;
             this.pictureBox6.TabStop = false;
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(612, 525);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 22);
+            this.textBox1.TabIndex = 9;
+            this.textBox1.Text = "88";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(612, 567);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 22);
+            this.textBox2.TabIndex = 10;
+            this.textBox2.Text = "91";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(612, 602);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 22);
+            this.textBox3.TabIndex = 9;
+            this.textBox3.Text = "80";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(612, 644);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 22);
+            this.textBox4.TabIndex = 10;
+            this.textBox4.Text = "82";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -166,6 +204,10 @@
             this.ClientSize = new System.Drawing.Size(1749, 707);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.btnHueInRange);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.tbHueRangeRight);
             this.Controls.Add(this.tbHueRangeLeft);
             this.Controls.Add(this.pictureBox5);
@@ -205,6 +247,10 @@
         private System.Windows.Forms.TextBox tbHueRangeRight;
         private System.Windows.Forms.Button btnHueInRange;
         private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox4;
     }
 }
 

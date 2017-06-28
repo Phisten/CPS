@@ -20,13 +20,16 @@ namespace WindowsFormsApplication2
     public partial class Form1 : Form
     {
         Image<Bgr, Byte> frame;
-        Gray hueInRangeLeft = new Gray(0d), hueInRangeRight = new Gray(0d);
+        Gray hueInRangeLeft1 = new Gray(0d), hueInRangeRight1 = new Gray(0d);
+        Gray hueInRangeLeft2 = new Gray(0d), hueInRangeRight2 = new Gray(0d);
+        Gray hueInRangeLeft3 = new Gray(0d), hueInRangeRight3 = new Gray(0d);
 
 
         public Form1()
         {
             InitializeComponent();
             frame = new Image<Bgr, byte>(new Size(640, 480));
+            btnHueInRange_Click(null, null);
         }
         private Capture cap = null;
 
@@ -70,8 +73,6 @@ namespace WindowsFormsApplication2
             frame.ROI = SrcImgRoiRect;
             Image<Hsv, byte> roiimg = frame.Convert<Hsv, byte>();
             Image<Gray, byte> HueImg = roiimg[0]; //H
-            pictureBox4.Image = roiimg[1].ToBitmap(); //S
-            pictureBox5.Image = roiimg[2].ToBitmap(); //V
             if (chkConvertHSV.Checked)
             {
                 pictureBox2.Image = HueImg.Convert<Hsv, byte>().ToBitmap();
@@ -84,13 +85,39 @@ namespace WindowsFormsApplication2
             g = Graphics.FromImage(pictureBox2.Image);
             g.DrawRectangle(new Pen(Color.Red, 2.0f), HueImgRoiRect);
 
+            //pictureBox3.Image = HueCOI.ToBitmap();
             //根據目前要搜索的顏色二值化影像
+
+
+            g = Graphics.FromImage(pictureBox2.Image);
+
+
+            CvBlob maxBlob = ColorFillter(HueImg, hueInRangeLeft1, hueInRangeRight1);
+            DrawRect(g, maxBlob);
+            maxBlob = ColorFillter(HueImg, hueInRangeLeft2, hueInRangeRight2);
+            DrawRect(g, maxBlob);
+            maxBlob = ColorFillter(HueImg, hueInRangeLeft3, hueInRangeRight3);
+            DrawRect(g, maxBlob);
+
+
+        }
+
+        private static void DrawRect(Graphics g, CvBlob maxBlob)
+        {
+            CvBlob curBlob = maxBlob;
+            if (!(curBlob.BoundingBox.Width < 80 || curBlob.BoundingBox.Height < 100))
+            {
+                g.DrawRectangle(new Pen(Color.Yellow, 2.0f), maxBlob.BoundingBox);
+            }
+        }
+
+        private CvBlob ColorFillter(Image<Gray, byte> HueImg, Gray hueInRangeLeft,Gray hueInRangeRight)
+        {
             Image<Gray, byte> HueCOI = HueImg.InRange(hueInRangeLeft, hueInRangeRight);
             //Image<Gray, byte> erodeimage = HueCOI.Erode(1);
             //Image<Gray, byte> dilateimage = erodeimage.Dilate(1);
-            pictureBox3.Image = HueCOI.ToBitmap();
 
-            
+
             //根據COI二值化影像找出最大色塊
             CvBlob maxBlob = null;
             CvBlobDetector m_blobDetector = new CvBlobDetector();
@@ -107,28 +134,7 @@ namespace WindowsFormsApplication2
                     }
                 }
             }
-            
-            if (maxBlob != null )
-            {
-                Rectangle tmpRect = maxBlob.BoundingBox;
-                int whiteWidth = tmpRect.Width / 8;
-                int whiteHeight = tmpRect.Height / 8;
-
-                tmpRect.X = Math.Max(0, tmpRect.X - whiteWidth);
-                tmpRect.Y = Math.Max(0, tmpRect.Y - whiteHeight);
-                tmpRect.Width = Math.Min(roiimg.Width - tmpRect.X, tmpRect.Width + whiteWidth * 2);
-                tmpRect.Height = Math.Min(roiimg.Height - tmpRect.Y, tmpRect.Height + whiteHeight * 2);
-                roiimg.ROI = tmpRect;
-                
-                Image<Hsv, byte> targetROI = roiimg.Copy();
-
-                pictureBox6.Image = targetROI.ToBitmap() ;
-            }
-
-
-
-
-
+            return maxBlob;
         }
 
 
@@ -257,10 +263,19 @@ namespace WindowsFormsApplication2
         {
             double tmp;
             double.TryParse(tbHueRangeRight.Text, out tmp);
-            hueInRangeRight = new Gray(tmp);
+            hueInRangeRight1 = new Gray(tmp);
             double.TryParse(tbHueRangeLeft.Text, out tmp);
-            hueInRangeLeft = new Gray(tmp);
+            hueInRangeLeft1 = new Gray(tmp);
 
+            double.TryParse(textBox2.Text, out tmp);
+            hueInRangeRight2 = new Gray(tmp);
+            double.TryParse(textBox1.Text, out tmp);
+            hueInRangeLeft2 = new Gray(tmp);
+
+            double.TryParse(textBox4.Text, out tmp);
+            hueInRangeRight3 = new Gray(tmp);
+            double.TryParse(textBox3.Text, out tmp);
+            hueInRangeLeft3 = new Gray(tmp);
         }
 
     }
