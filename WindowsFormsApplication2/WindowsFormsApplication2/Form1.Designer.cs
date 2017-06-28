@@ -171,7 +171,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 22);
             this.textBox1.TabIndex = 9;
-            this.textBox1.Text = "88";
+            this.textBox1.Text = "100";
             // 
             // textBox2
             // 
@@ -179,7 +179,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 22);
             this.textBox2.TabIndex = 10;
-            this.textBox2.Text = "91";
+            this.textBox2.Text = "110";
             // 
             // textBox3
             // 
@@ -187,7 +187,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 22);
             this.textBox3.TabIndex = 9;
-            this.textBox3.Text = "80";
+            this.textBox3.Text = "25";
             // 
             // textBox4
             // 
@@ -195,7 +195,7 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(100, 22);
             this.textBox4.TabIndex = 10;
-            this.textBox4.Text = "82";
+            this.textBox4.Text = "31";
             // 
             // Form1
             // 

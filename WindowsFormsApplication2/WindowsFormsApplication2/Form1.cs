@@ -93,21 +93,22 @@ namespace WindowsFormsApplication2
 
 
             CvBlob maxBlob = ColorFillter(HueImg, hueInRangeLeft1, hueInRangeRight1);
-            DrawRect(g, maxBlob);
+            DrawRect(g, maxBlob,"St1");
             maxBlob = ColorFillter(HueImg, hueInRangeLeft2, hueInRangeRight2);
-            DrawRect(g, maxBlob);
+            DrawRect(g, maxBlob, "St2");
             maxBlob = ColorFillter(HueImg, hueInRangeLeft3, hueInRangeRight3);
-            DrawRect(g, maxBlob);
+            DrawRect(g, maxBlob, "St3");
 
 
         }
-
-        private static void DrawRect(Graphics g, CvBlob maxBlob)
+        private static void DrawRect(Graphics g, CvBlob maxBlob, string drawStr)
         {
+            Font font = new Font("Arial", 24, FontStyle.Bold); //creates new font
             CvBlob curBlob = maxBlob;
             if (!(curBlob.BoundingBox.Width < 80 || curBlob.BoundingBox.Height < 100))
             {
                 g.DrawRectangle(new Pen(Color.Yellow, 2.0f), maxBlob.BoundingBox);
+                g.DrawString(drawStr,font,Brushes.Black,maxBlob.Centroid);
             }
         }
 
