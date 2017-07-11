@@ -105,7 +105,11 @@ namespace WindowsFormsApplication2
         {
             Font font = new Font("Arial", 24, FontStyle.Bold); //creates new font
             CvBlob curBlob = maxBlob;
-            if (!(curBlob.BoundingBox.Width < 80 || curBlob.BoundingBox.Height < 100))
+            if (maxBlob == null)
+            {
+                return;
+            }
+            else if (!(curBlob.BoundingBox.Width < 80 || curBlob.BoundingBox.Height < 100))
             {
                 g.DrawRectangle(new Pen(Color.Yellow, 2.0f), maxBlob.BoundingBox);
                 g.DrawString(drawStr,font,Brushes.Black,maxBlob.Centroid);
