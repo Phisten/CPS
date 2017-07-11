@@ -21,12 +21,17 @@ namespace WindowsFormsApplication2
     {
         Image<Bgr, Byte> frame;
         Gray hueInRangeLeft = new Gray(0d), hueInRangeRight = new Gray(0d);
-
+        int angleRowDataCount = 10;
+        List<double> angleRowData;
 
         public Form1()
         {
             InitializeComponent();
             frame = new Image<Bgr, byte>(new Size(640, 480));
+
+            angleRowData = new List<double>(angleRowDataCount);
+            for (int i = 0; i < angleRowDataCount; i++)
+                angleRowData.Add(0);
         }
         private Capture cap = null;
 
@@ -39,7 +44,7 @@ namespace WindowsFormsApplication2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            cap = new Capture(0); //連結攝影機
+            cap = new Capture(2); //連結攝影機
             Application.Idle += new EventHandler(Application_Idle);//在idle的event下，把畫面設定到pictureBox1上
 
         }
@@ -123,14 +128,105 @@ namespace WindowsFormsApplication2
                 Image<Hsv, byte> targetROI = roiimg.Copy();
 
                 pictureBox6.Image = targetROI.ToBitmap() ;
+
+
+                //angle and dist
+                Image<Gray, byte> targetThres = targetROI.Convert<Gray, byte>();
+                targetThres = targetThres.ThresholdBinary(new Gray(120), new Gray(255));
+                //TODO : AUTO THRESHOLD
+                //targetThres = targetThres.ThresholdAdaptive(new Gray(255),Emgu.CV.CvEnum.ADAPTIVE_THRESHOLD_TYPE.CV_ADAPTIVE_THRESH_GAUSSIAN_C,Emgu.CV.CvEnum.THRESH.CV_THRESH_OTSU,3,new Gray(0));
+
+                //get boundingBox cal width / height
+
+                int targetCenterX = -1;
+                int targetCenterY = -1;
+                int targetWidth = -1;
+                int targetHeight = -1;
+                double targetAngle = 0.0d;
+                double targetDist = 0.0d;
+                {
+                    CvBlob targetBlob = null;
+                    CvBlobDetector m_targetblobDetector = new CvBlobDetector();
+                    CvBlobs targetblobs = new CvBlobs();
+                    m_blobDetector.Detect(targetThres, targetblobs);
+                    if (targetblobs.Count > 0)
+                    {
+                        targetBlob = targetblobs.ElementAt(0).Value;
+                        foreach (var item in targetblobs)
+                        {
+                            if (item.Value.Area > targetBlob.Area)
+                            {
+                                targetBlob = item.Value;
+                            }
+                        }
+                    }
+                    if (targetBlob != null)
+                    {
+                        targetCenterX = targetBlob.BoundingBox.X + targetBlob.BoundingBox.Width / 2;
+                        targetCenterY = targetBlob.BoundingBox.Y + targetBlob.BoundingBox.Height / 2;
+                        targetWidth = targetBlob.BoundingBox.Width;
+                        targetHeight = targetBlob.BoundingBox.Height;
+                        targetAngle = Math.Max(Math.Round( ((double)targetHeight / (double)targetWidth-1d) * 136d),0d);
+
+                        int centerHeight = 0;
+
+                        //角度計算
+                        int targetX = targetBlob.BoundingBox.X;
+                        int targetY = targetBlob.BoundingBox.Y;
+                        //boundingBox sum for angle +- check
+                        //int[] targetHorizontalSum = new int[targetWidth];
+                        int leftWeights=0, rightWeights=0;
+                        for (int i = targetX; i < targetX+targetWidth; i++)
+                        {
+                            for (int j = targetY; j < targetY+targetHeight; j++)
+                            {
+                                if (targetThres[j,  i].Intensity == 0)
+                                {
+                                    //angle param
+                                    if (i < targetCenterX)
+                                        leftWeights++;
+                                    else
+                                        rightWeights++;
+
+                                    //dist param
+                                    if (i == targetCenterX)
+                                        centerHeight++;
+                                }
+                            }
+                        }
+                        if (rightWeights > leftWeights)
+                        {
+                            targetAngle *= -1;
+                        }
+                        //角度均值
+                        angleRowData.RemoveAt(0);
+                        angleRowData.Add(targetAngle);
+                        targetAngle = Math.Round(angleRowData.Average());
+
+                        //距離計算
+                        //TODO: config
+                        double baseDist1 = 40;
+                        double basePixelHeight1 = 285;
+                        double baseDist2 = 150;
+                        double basePixelHeight2 = 77;
+                        targetDist = Math.Round(baseDist2 * basePixelHeight2 / centerHeight);
+
+
+                    }
+                }
+
+                if (targetHeight == 0)
+                    targetHeight = -1;
+                label1.Text = targetWidth + "," + targetHeight + " --> " + Math.Round((double)targetWidth / (double)targetHeight, 2);
+                label2.Text = "角度:" + targetAngle;
+                label3.Text = "距離:" + targetDist;
+                pictureBox7.Image = targetThres.ToBitmap();
             }
 
 
 
 
-
         }
-
 
 
         Point SrcImgRoiP1 = new Point(0, 0), SrcImgRoiP2 = new Point(0, 0);
@@ -260,6 +356,11 @@ namespace WindowsFormsApplication2
             hueInRangeRight = new Gray(tmp);
             double.TryParse(tbHueRangeLeft.Text, out tmp);
             hueInRangeLeft = new Gray(tmp);
+
+        }
+
+        private void tbHueRangeRight_TextChanged(object sender, EventArgs e)
+        {
 
         }
 

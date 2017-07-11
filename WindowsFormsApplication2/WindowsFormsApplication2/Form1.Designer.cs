@@ -40,12 +40,18 @@
             this.tbHueRangeRight = new System.Windows.Forms.TextBox();
             this.btnHueInRange = new System.Windows.Forms.Button();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -61,7 +67,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(641, 93);
+            this.button1.Location = new System.Drawing.Point(642, 21);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(114, 49);
             this.button1.TabIndex = 1;
@@ -71,7 +77,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(641, 196);
+            this.button2.Location = new System.Drawing.Point(642, 124);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(114, 49);
             this.button2.TabIndex = 2;
@@ -95,7 +101,7 @@
             this.chkConvertHSV.AutoSize = true;
             this.chkConvertHSV.Checked = true;
             this.chkConvertHSV.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkConvertHSV.Location = new System.Drawing.Point(654, 391);
+            this.chkConvertHSV.Location = new System.Drawing.Point(649, 226);
             this.chkConvertHSV.Name = "chkConvertHSV";
             this.chkConvertHSV.Size = new System.Drawing.Size(58, 16);
             this.chkConvertHSV.TabIndex = 5;
@@ -128,21 +134,23 @@
             // 
             // tbHueRangeLeft
             // 
-            this.tbHueRangeLeft.Location = new System.Drawing.Point(612, 443);
+            this.tbHueRangeLeft.Location = new System.Drawing.Point(607, 248);
             this.tbHueRangeLeft.Name = "tbHueRangeLeft";
             this.tbHueRangeLeft.Size = new System.Drawing.Size(100, 22);
             this.tbHueRangeLeft.TabIndex = 9;
             // 
             // tbHueRangeRight
             // 
-            this.tbHueRangeRight.Location = new System.Drawing.Point(612, 485);
+            this.tbHueRangeRight.Location = new System.Drawing.Point(607, 290);
             this.tbHueRangeRight.Name = "tbHueRangeRight";
             this.tbHueRangeRight.Size = new System.Drawing.Size(100, 22);
             this.tbHueRangeRight.TabIndex = 10;
+            this.tbHueRangeRight.Text = "5";
+            this.tbHueRangeRight.TextChanged += new System.EventHandler(this.tbHueRangeRight_TextChanged);
             // 
             // btnHueInRange
             // 
-            this.btnHueInRange.Location = new System.Drawing.Point(718, 460);
+            this.btnHueInRange.Location = new System.Drawing.Point(713, 265);
             this.btnHueInRange.Name = "btnHueInRange";
             this.btnHueInRange.Size = new System.Drawing.Size(61, 36);
             this.btnHueInRange.TabIndex = 11;
@@ -159,11 +167,60 @@
             this.pictureBox6.TabIndex = 12;
             this.pictureBox6.TabStop = false;
             // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Location = new System.Drawing.Point(311, 471);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(293, 263);
+            this.pictureBox7.TabIndex = 13;
+            this.pictureBox7.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(618, 328);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(33, 12);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "label1";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(618, 358);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(33, 12);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "label2";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(618, 385);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(33, 12);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "label3";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(618, 412);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(33, 12);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "label4";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1749, 707);
+            this.ClientSize = new System.Drawing.Size(1749, 1005);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.pictureBox7);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.btnHueInRange);
             this.Controls.Add(this.tbHueRangeRight);
@@ -186,6 +243,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -205,6 +263,11 @@
         private System.Windows.Forms.TextBox tbHueRangeRight;
         private System.Windows.Forms.Button btnHueInRange;
         private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.PictureBox pictureBox7;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 
