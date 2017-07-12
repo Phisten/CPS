@@ -44,7 +44,7 @@ namespace WindowsFormsApplication2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            cap = new Capture(2); //連結攝影機
+            cap = new Capture(1); //連結攝影機
             Application.Idle += new EventHandler(Application_Idle);//在idle的event下，把畫面設定到pictureBox1上
 
         }
@@ -54,7 +54,6 @@ namespace WindowsFormsApplication2
 
             Application.Idle -= new EventHandler(Application_Idle);//清除idle的值
             pictureBox1.Image = null;//清除pictureBox1的圖
-
 
         }
 
