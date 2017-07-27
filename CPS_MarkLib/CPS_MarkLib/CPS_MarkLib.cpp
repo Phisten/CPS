@@ -137,8 +137,12 @@ void DetectCard()
 
 				//¨¤«×­pºâ
 				//left right check
-				float leftBoard = corners[i][0].y + corners[i][3].y;
-				float rightBoard = corners[i][1].y + corners[i][2].y;
+				float yTmp = corners[i][3].y - corners[i][0].y;
+				float xTmp = corners[i][3].x - corners[i][0].x;
+				float leftBoard = sqrt(yTmp*yTmp + xTmp*xTmp);
+				yTmp = -corners[i][1].y + corners[i][2].y;
+				xTmp = -corners[i][1].x + corners[i][2].x;
+				float rightBoard = sqrt(yTmp*yTmp + xTmp*xTmp);
 				if (leftBoard > rightBoard)
 				{
 					targetAngle *= -1;
@@ -152,10 +156,11 @@ void DetectCard()
 				putText(imageCopy, oss1.str(), corners[i][1], FONT_HERSHEY_SIMPLEX, 0.4, Scalar(0, 0, 200), 1, LINE_8, false);
 
 				//¶ZÂ÷­pºâ
+
 				double baseDist1 = 30;
-				double basePixelHeight1 = 144;
-				double baseDist2 = 120;
-				double basePixelHeight2 = 37;
+				double basePixelHeight1 = 144; //5.5cm mark
+				//double baseDist2 = 120;
+				//double basePixelHeight2 = 37;
 				//int targetDist = round(baseDist2 * basePixelHeight2 / targetHeight);
 				int targetDist = round(baseDist1 * basePixelHeight1 / targetHeight);
 
