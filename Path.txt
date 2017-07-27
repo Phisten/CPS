@@ -1,1 +1,0 @@
-C:\Emgu\emgucv-windows-universal-cuda 2.9.0.1922\bin\x86
