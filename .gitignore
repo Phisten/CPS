@@ -1,8 +1,6 @@
 
 *.pdb
-*.exe
-*.pdb
-*.pdb
 *.Cache
 *.cache
-*.exe
+*.log
+*.tlog
