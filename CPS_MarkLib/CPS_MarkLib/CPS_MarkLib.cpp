@@ -102,10 +102,9 @@ void DetectCard()
 	cv::VideoCapture inputVideo;
 	inputVideo.open(0);
 
-
 	cv::Mat cameraMatrix, distCoeffs;
 	// camera parameters are read from somewhere
-	readCameraParameters("out_camera_data.yml",cameraMatrix, distCoeffs);
+	//readCameraParameters("out_camera_data.yml",cameraMatrix, distCoeffs);
 	cv::Ptr<cv::aruco::Dictionary> dictionary = cv::aruco::getPredefinedDictionary(cv::aruco::DICT_6X6_250);
 
 	while (inputVideo.grab()) {
@@ -120,10 +119,10 @@ void DetectCard()
 		{
 			cv::aruco::drawDetectedMarkers(imageCopy, corners, ids);
 
-
 			//vector< Mat > rvecs, tvecs;
 			//cv::aruco::estimatePoseSingleMarkers(corners, 0.05, cameraMatrix, distCoeffs, rvecs, tvecs);
 			//// draw axis for each marker
+
 			for (int i = 0; i < ids.size(); i++)
 			{
 				//	cv::aruco::drawAxis(imageCopy, cameraMatrix, distCoeffs, rvecs[i], tvecs[i], 0.1);
@@ -133,7 +132,6 @@ void DetectCard()
 				int targetWidth = (corners[i][1].x + corners[i][2].x - corners[i][3].x - corners[i][0].x) / 2.0;
 				int targetHeight = (-corners[i][1].y + corners[i][2].y + corners[i][3].y - corners[i][0].y) / 2.0;
 				int targetAngle = max(round(((double)targetHeight / (double)targetWidth - 1.0) * 136.0), 0.0);
-
 
 				//¨¤«×­pºâ
 				//left right check
@@ -156,13 +154,14 @@ void DetectCard()
 				putText(imageCopy, oss1.str(), corners[i][1], FONT_HERSHEY_SIMPLEX, 0.4, Scalar(0, 0, 200), 1, LINE_8, false);
 
 				//¶ZÂ÷­pºâ
-
-				double baseDist1 = 30;
-				double basePixelHeight1 = 144; //5.5cm mark
+				//double baseDist1 = 30;
+				//double basePixelHeight1 = 144; //5.5cm mark
+				double baseDist1 = 45;
+				double basePixelHeight1 = 197; //10.9cm mark
+				int targetDist = round(baseDist1 * basePixelHeight1 / targetHeight);
 				//double baseDist2 = 120;
 				//double basePixelHeight2 = 37;
 				//int targetDist = round(baseDist2 * basePixelHeight2 / targetHeight);
-				int targetDist = round(baseDist1 * basePixelHeight1 / targetHeight);
 
 				ostringstream oss2;
 				oss2 << "dist: " << targetDist;
