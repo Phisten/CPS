@@ -1,8 +1,9 @@
 /* *************************************************************
-CPS Mark Detector Demo (x86,vs2013,opencv2.4.10)
-Last Update: Phisten  - 2017/07/10
+CPS Mark Detector Demo (x86,vs2013,opencv3.2.0)
+Last Update: Phisten  - 2017/08/14
 
------v1.0.0 alpha
+-----v1.1.0 alpha
+c++ ver
 
 
 
@@ -81,10 +82,6 @@ int main(int argc, char *argv[]) {
 	//double repError = cv::aruco::calibrateCameraCharuco(allCharucoCorners, allCharucoIds, board, imgSize, cameraMatrix, distCoeffs, rvecs, tvecs, calibrationFlags);
 
 	DetectCard();
-
-
-
-
 	return 0;
 }
 
